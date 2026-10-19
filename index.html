@@ -413,6 +413,58 @@ body{
 .elective-box{background:linear-gradient(135deg,rgba(148,7,10,0.04),rgba(201,169,97,0.08));border-radius:10px;padding:16px 18px;font-size:12.5px;line-height:1.9;color:var(--ink-2);text-align:justify}
 .elective-box strong{color:var(--ink);font-weight:600}
 .elective-divider{width:1px;height:30px;background:rgba(148,7,10,0.10)}
+/* 选修课 · 八大方向折叠分组 */
+.elective-groups{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.egroup{border:1px solid rgba(148,7,10,0.10);border-radius:12px;background:#FFFFFF;overflow:hidden;transition:border-color .35s var(--ease),box-shadow .35s var(--ease)}
+.egroup.hot{border-color:rgba(201,169,97,0.5);background:linear-gradient(135deg,rgba(201,169,97,0.06),rgba(148,7,10,0.03))}
+.egroup.open{border-color:rgba(148,7,10,0.22);box-shadow:0 12px 26px -18px rgba(107,5,8,0.28)}
+.egroup-head{display:flex;align-items:center;gap:10px;padding:14px 14px;cursor:pointer;user-select:none}
+.egroup-head:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;border-radius:12px}
+.egroup-title{flex:1;font-size:13.5px;font-weight:600;color:var(--ink);letter-spacing:.3px;line-height:1.4}
+.egroup.hot .egroup-title{color:var(--red)}
+.egroup-star{margin-right:2px}
+.egroup-meta{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.egroup-hot-tag{font-size:10px;font-weight:700;letter-spacing:1px;color:#6B0508;padding:3px 8px;border-radius:100px;background:linear-gradient(135deg,#E5D4A8,#C9A961)}
+.egroup-count{font-size:11px;color:var(--ink-3);font-weight:500}
+.egroup-chev{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(148,7,10,0.06);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:12px;transition:transform .4s var(--ease)}
+.egroup.open .egroup-chev{transform:rotate(180deg);background:rgba(201,169,97,0.18)}
+.egroup-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.egroup.open .egroup-wrap{grid-template-rows:1fr}
+.egroup-body{overflow:hidden;min-height:0}
+.egroup-chips{display:flex;flex-wrap:wrap;gap:8px;padding:2px 14px 16px}
+.chip{font-size:12px;line-height:1.4;color:var(--ink-2);background:rgba(148,7,10,0.05);border:1px solid rgba(148,7,10,0.08);border-radius:100px;padding:6px 11px;display:inline-flex;align-items:center;gap:5px;transition:background .25s,color .25s,border-color .25s}
+.egroup.hot .chip{border-color:rgba(201,169,97,0.35)}
+.chip-honor{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;font-size:9px;font-weight:700;font-style:normal;color:#6B0508;background:linear-gradient(135deg,#E5D4A8,#C9A961);flex-shrink:0}
+
+/* ========== 课程可选中（学分自选） ========== */
+.chip.selectable{cursor:pointer;user-select:none;position:relative;padding-right:11px}
+.chip.selectable::after{content:'+' ;font-weight:700;margin-left:1px;color:rgba(148,7,10,0.35);transition:color .25s,transform .25s}
+.chip.selectable.on{background:linear-gradient(135deg,#94070A 0%,#6B0508 100%);color:#F5E9C8;border-color:rgba(201,169,97,0.7);box-shadow:0 3px 10px -3px rgba(74,2,4,0.55)}
+.chip.selectable.on::after{content:'✓';color:#E5D4A8;transform:scale(1.05)}
+
+/* ========== 学分进度浮条 ========== */
+.credit-tracker{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));z-index:998;transform:translateX(-50%) translateY(20px);
+  opacity:0;pointer-events:none;transition:opacity .45s var(--ease),transform .55s var(--ease);
+  background:rgba(24,10,6,0.92);backdrop-filter:blur(10px);border:1px solid rgba(201,169,97,0.4);border-radius:16px;
+  padding:10px 16px;display:flex;align-items:center;gap:14px;box-shadow:0 12px 30px -8px rgba(0,0,0,0.6);max-width:calc(100vw - 120px)}
+.credit-tracker.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.ct-item{display:flex;flex-direction:column;gap:2px;min-width:44px}
+.ct-item .ct-label{font-size:9px;letter-spacing:2px;color:rgba(229,212,168,0.6)}
+.ct-item .ct-val{font-size:17px;font-weight:700;color:#F5E9C8;line-height:1}
+.ct-item .ct-val b{font-size:10px;font-weight:500;color:rgba(229,212,168,0.7);margin-left:1px}
+.ct-item .ct-sub{font-size:9px;color:rgba(229,212,168,0.55)}
+.ct-sep{width:1px;height:26px;background:rgba(201,169,97,0.25)}
+.ct-bar{width:2px;height:26px;background:rgba(201,169,97,0.18);border-radius:2px;overflow:hidden}
+.ct-bar i{display:block;width:100%;height:0;background:linear-gradient(#E5D4A8,#C9A961);transition:height .5s var(--ease)}
+.ct-reset{font-size:10px;letter-spacing:1px;color:rgba(229,212,168,0.7);cursor:pointer;padding:4px 6px;border-radius:8px;transition:background .25s,color .25s}
+.ct-reset:hover{background:rgba(201,169,97,0.15);color:#E5D4A8}
+
+/* 达标提醒 */
+.ct-done{display:none;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#E5D4A8;animation:ctPulse 1.6s ease-in-out infinite}
+.ct-done.show{display:inline-flex}
+@keyframes ctPulse{0%,100%{opacity:1}50%{opacity:.55}}
+.credit-tracker.done{border-color:#C9A961;background:linear-gradient(135deg,rgba(148,7,10,0.95),rgba(74,2,4,0.95))}
+.credit-tracker.done .ct-bar i{background:linear-gradient(#FFD98A,#C9A961)}
 
 /* ========== 05 师资 ========== */
 .faculty-hero{
@@ -674,6 +726,9 @@ body{
 .course-body strong{font-size:14.5px}
 .course-alt{font-size:12.5px}
 .stat-seal-text{font-size:13px;line-height:1.75}
+.stat-seal-center{justify-content:center;padding:6px 0 0;box-shadow:none;background:transparent;margin-bottom:22px}
+.stat-seal-center::before{display:none}
+.stat-seal-center .stat-seal-num{margin:0 auto}
 .tl-text{font-size:10.5px;line-height:1.5}
 .tl-year{font-size:14px}
 .section-sub{font-size:12px;letter-spacing:1.5px}
@@ -960,12 +1015,12 @@ html{scroll-padding-bottom:90px}
 .adv-feat-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:8px;margin-right:11px;box-shadow:0 0 0 3px rgba(201,169,97,0.15)}
 .adv-feat-text{font-size:13px;line-height:1.7;color:var(--ink-2)}
 .adv-feat-text strong{color:var(--ink);font-weight:600}</style>
-<style></style></head>
+</head>
 <body>
 
 <div class="progress-bar" id="progressBar" style="left: 13.9px; width: 375px;"><div class="progress-fill" id="progressFill" style="width: 89.031%;"></div></div>
 
-<div class="phone-frame" id="phoneFrame" spellcheck="true">
+<div class="phone-frame" id="phoneFrame">
 
   <!-- ==================== HERO ==================== -->
   <section class="hero">
@@ -1038,15 +1093,11 @@ html{scroll-padding-bottom:90px}
     <div class="card stack-item" style="--i: 0; --s: 0.9500; --dim: 0.350;">
       <div class="info-card-head">
         <div class="info-num">01</div>
-        <div class="info-title">学院定位</div>
+        <div class="info-title">学院简介</div>
         <div class="stack-idx">1 / 3</div>
       </div>
-      <div class="stat-seal in-card">
-      <div class="stat-seal-num">
-        <div class="stat-seal-val"><span data-count="30">30</span><sup>+</sup></div>
-        <div class="stat-seal-label">周年</div>
-      </div>
-      <div class="stat-seal-text">北京大学的一个以经济学为基础的多学科综合性学院，也是中国高校最具影响力的智库之一。</div>
+      <div class="about-block in-card">
+      <p>北京大学国家发展研究院（NSD）是北京大学一所以经济学为基础的<strong>多学科综合性学院</strong>。前身为林毅夫等六位海归经济学博士 1994 年创立的<strong>北京大学中国经济研究中心（CCER）</strong>，2008 年更名为国家发展研究院。</p>
       </div>
     </div>
 
@@ -1055,6 +1106,12 @@ html{scroll-padding-bottom:90px}
         <div class="info-num">02</div>
         <div class="info-title">发展历程 · 1994 至今</div>
         <div class="stack-idx">2 / 3</div>
+      </div>
+      <div class="stat-seal in-card stat-seal-center" style="margin-bottom:22px">
+      <div class="stat-seal-num">
+        <div class="stat-seal-val"><span data-count="30">30</span><sup>+</sup></div>
+        <div class="stat-seal-label">周年</div>
+      </div>
       </div>
       <div class="timeline in-card in-view" id="timeline1">
         <div class="timeline-track"></div>
@@ -1086,11 +1143,11 @@ html{scroll-padding-bottom:90px}
     <div class="card stack-item" style="--i: 2; min-height: 118px;">
       <div class="info-card-head">
         <div class="info-num">03</div>
-        <div class="info-title">国家发展研究院（NSD）</div>
+        <div class="info-title">学院定位</div>
         <div class="stack-idx">3 / 3</div>
       </div>
       <div class="about-block in-card">
-      <p>北京大学国家发展研究院（NSD）是北京大学一所以经济学为基础的<strong>多学科综合性学院</strong>。前身为林毅夫等六位海归经济学博士 1994 年创立的<strong>北京大学中国经济研究中心（CCER）</strong>，2008 年更名为国家发展研究院。</p><p>学院秉承北大<strong>兼容并包、和而不同</strong>的学风，高度关注中国的现实问题，致力于学术与现实的结合。经过三十年发展，已形成<strong>教学、科研与智库于一体</strong>的综合性学院，成为北大构建世界一流大学的重要组成部分。</p>
+      <p>学院秉承北大<strong>兼容并包、和而不同</strong>的学风，高度关注中国的现实问题，致力于学术与现实的结合。经过三十年发展，已形成<strong>教学、科研与智库于一体</strong>的综合性学院，成为北大构建世界一流大学的重要组成部分。</p>
       </div>
     </div>
     </div>
@@ -1128,42 +1185,14 @@ html{scroll-padding-bottom:90px}
       </div>
     </div>
 
-    <div class="stack-hint reveal in-view"><span></span>向上滑动，卡片依次叠起<span></span></div>
-    <div class="sticky-stack" style="--peek:56px">
-      <div class="card card-accent stack-item" style="--i: 0; --s: 0.9500; --dim: 0.350;">
-        <div class="info-card-head">
-          <div class="info-num">01</div>
-          <div class="info-title">项目起源 · 1996</div>
-          <div class="stack-idx">1 / 3</div>
-        </div>
-        <p>北京大学国家发展研究院经济学双学位项目创办于 1996 年，凭借系统的课程设置、优秀的师资队伍与规范的教学服务，受到北大校内外学生的广泛关注。</p>
-      </div>
-      <div class="card card-accent stack-item" style="--i: 1; --s: 0.9500; --dim: 0.350;">
-        <div class="info-card-head">
-          <div class="info-num">02</div>
-          <div class="info-title">面向校外开放 · 2003</div>
-          <div class="stack-idx">2 / 3</div>
-        </div>
-        <p>2003 年秋季起，为满足校外非经济学专业学生学习经济学的需求，经北京大学批准，项目开始招收校外在读本科生及本科毕业生修读。</p>
-      </div>
-      <div class="card card-accent stack-item" style="--i: 2; min-height: 105px;">
-        <div class="info-card-head">
-          <div class="info-num">03</div>
-          <div class="info-title">项目调整 · 2022</div>
-          <div class="stack-idx">3 / 3</div>
-        </div>
-        <p>根据教育部相关规定，国发院停止原经济学校外双学位招生，并自 2022 年起将项目调整为<strong>北京大学校外经济学辅修项目</strong>。</p>
-      </div>
-    </div>
-    <div class="highlight-card reveal in-view" style="--d:.25s">
+    <div class="highlight-card reveal in-view" style="--d:.15s">
       <div class="highlight-card-glow"></div>
       <div class="highlight-card-grid"></div>
       <div class="highlight-inner">
         <div class="highlight-badge">本 合 作 项 目</div>
         <div class="highlight-title">依托北京大学校外经济学辅修项目开展</div>
         <div class="highlight-bar"></div>
-        <p>本项目延续国发院长期积累的教学经验，发挥<strong>经济学研究与教学</strong>方面的优势，为合作院校同学提供走进北大国发院、进一步研修经济学、拓宽学术视野、深化专业理解的学习机会。</p>
-        <p style="margin-top:10px;">课程注重经济学<strong>核心理论与现实应用</strong>相结合，引导同学在已有专业基础上深化理论认识、拓展研究视野，提升运用经济学方法<strong>分析现实问题</strong>的能力。</p>
+        <p>本项目依托北京大学校外经济学辅修项目开展，延续长期积累的教学经验，为希望<strong>拓展知识结构、系统学习经济学</strong>的校外学子提供学习机会。课程注重经济学<strong>基础理论与现实应用</strong>相结合，帮助同学逐步建立经济学知识框架，增添<strong>理解行业与社会的经济学视角</strong>。</p>
       </div>
     </div>
   </section>
@@ -1183,7 +1212,7 @@ html{scroll-padding-bottom:90px}
         <div class="adv-en">WHY THIS PROGRAM</div>
         <div class="adv-title">名校资源 · 系统培养 · 灵活学习</div>
         <div class="adv-bar"></div>
-        <p>依托<strong>北京大学国家发展研究院</strong>的学术实力与教学积淀，为合作院校同学提供一条在原有专业之外系统深入经济学的成长路径——不止于课堂，更通向<strong>学术深造与职业发展</strong>。</p>
+        <p>依托<strong>北京大学国家发展研究院</strong>的学术实力与教学积淀，为合作院校同学提供系统深入经济学的成长路径——不止于课堂，更通向<strong>学术深造与职业发展</strong>。</p>
       </div>
     </div>
 
@@ -1218,8 +1247,7 @@ html{scroll-padding-bottom:90px}
       <div class="adv-feats-title">学习体验</div>
       <div class="adv-feat"><div class="adv-feat-dot"></div><div class="adv-feat-text">与<strong>北大校内学生同班上课</strong>，共享师资与课堂资源</div></div>
       <div class="adv-feat"><div class="adv-feat-dot"></div><div class="adv-feat-text"><strong>42 学分</strong>系统培养（必修 15 + 选修 27），核心理论结合现实应用</div></div>
-      <div class="adv-feat"><div class="adv-feat-dot"></div><div class="adv-feat-text"><strong>70 位教研人员</strong>授课，含 <strong>3 位院士</strong>与多位国家级智库学者</div></div>
-      <div class="adv-feat"><div class="adv-feat-dot"></div><div class="adv-feat-text">实行<strong>完全学分制</strong>，自主选课，<strong>不限专业背景</strong></div></div>
+      <div class="adv-feat"><div class="adv-feat-dot"></div><div class="adv-feat-text">实行<strong>完全学分制</strong>，自主选课</div></div>
     </div>
   </section>
 
@@ -1237,43 +1265,13 @@ html{scroll-padding-bottom:90px}
       <div class="faculty-hero-grid"></div>
       <div class="faculty-hero-inner">
         <div class="faculty-en">FACULTY OVERVIEW</div>
-        <div class="faculty-title">智囊人物云集 · 学界业界权威</div>
+        <div class="faculty-title">学界业界权威 · 师资梯队完整</div>
         <div class="faculty-bar"></div>
         <p>学院拥有约<strong>70 位教研人员</strong>组成的全职教师团队，其中<strong>3 位院士、9 位博雅教授、6 位长江学者</strong>，多位学者在国家级智库与政策机构担任要职，学界与业界影响力兼备。</p>
       </div>
     </div>
 
-    <div class="card thinktank-card reveal in-view" style="--d:.1s">
-      <div class="tt-head">
-        <div class="tt-head-icon">🏛️</div>
-        <div>
-          <div class="tt-head-title">智囊人物云集</div>
-          <div class="tt-head-en">ACADEMIC &amp; POLICY LEADERS</div>
-        </div>
-      </div>
-      <div class="tt-item">
-        <div class="tt-names">林毅夫</div>
-        <div class="tt-role">全国政协常委、经济委员会副主任</div>
-      </div>
-      <div class="tt-item">
-        <div class="tt-names">周其仁<em>·</em>宋国青<em>·</em>黄益平<em>·</em>易纲</div>
-        <div class="tt-role"><strong>央行货币政策委员会</strong>委员或曾任委员</div>
-      </div>
-      <div class="tt-item">
-        <div class="tt-names">林毅夫<em>·</em>周其仁<em>·</em>张维迎</div>
-        <div class="tt-role">改革开放<strong>“30 年 30 人”</strong></div>
-      </div>
-      <div class="tt-item">
-        <div class="tt-names">刘国恩</div>
-        <div class="tt-role">国务院国家医改专家咨询委员会委员、中国医学科学院学部委员、中国药物经济学专业委员会主任委员</div>
-      </div>
-      <div class="tt-item">
-        <div class="tt-names">中国经济 50 人论坛</div>
-        <div class="tt-role">林毅夫、周其仁、易纲、张维迎、黄益平</div>
-      </div>
-    </div>
-
-    <div class="card faculty-grid-card reveal in-view" style="--d:.15s">
+    <div class="card faculty-grid-card reveal in-view" style="--d:.1s">
       <div class="fg-title">师资结构 · 学术梯队</div>
 
       <div class="fg-group-title">院士</div>
@@ -1351,12 +1349,8 @@ html{scroll-padding-bottom:90px}
             <div class="type-en">REQUIRED · 15 CREDITS</div>
           </div>
         </div>
-        <div class="course-list">
-          <div class="course-item"><div class="course-idx">1</div><div class="course-body"><strong>经济学原理</strong></div></div>
-          <div class="course-item"><div class="course-idx">2</div><div class="course-body"><strong>中级宏观经济学</strong></div></div>
-          <div class="course-item"><div class="course-idx">3</div><div class="course-body"><strong>中级微观经济学</strong></div></div>
-          <div class="course-item"><div class="course-idx">4</div><div class="course-body"><strong>计量经济学</strong></div></div>
-          <div class="course-item"><div class="course-idx">5</div><div class="course-body"><strong>中国经济专题</strong></div></div>
+        <div class="egroup-chips" style="padding:0 0 4px">
+          <span class="chip">经济学原理</span><span class="chip">中级宏观经济学</span><span class="chip">中级微观经济学</span><span class="chip">计量经济学</span><span class="chip">中国经济专题</span>
         </div>
         <div class="course-hint">💡 中级宏观、中级微观、计量经济学均开设 <b>荣誉课</b>——难度更高，更具挑战性。</div>
       </div>
@@ -1365,11 +1359,117 @@ html{scroll-padding-bottom:90px}
         <div class="course-card-head">
           <div class="type-badge gold">选</div>
           <div>
-            <div class="type-name">选修课 · 自由组合</div>
+            <div class="type-name">选修课 · 八大方向</div>
             <div class="type-en">ELECTIVE · 27 CREDITS</div>
           </div>
         </div>
-        <div class="elective-box">在校外辅修培养方案中 <strong>任选</strong>，根据个人兴趣与专业方向自由组合。</div>
+        <div class="elective-box">在校外辅修培养方案中 <strong>任选</strong>，根据个人兴趣自由组合。以下八大方向，点击各方向展开查看完整课程。</div>
+
+        <div class="elective-groups">
+          <div class="egroup hot">
+            <div class="egroup-head" role="button" tabindex="0" aria-expanded="false">
+              <div class="egroup-title"><span class="egroup-star">⭐</span>一、前沿科技与新经济</div>
+              <div class="egroup-meta"><span class="egroup-count">12 门</span></div>
+              <div class="egroup-chev" aria-hidden="true">▾</div>
+            </div>
+            <div class="egroup-wrap"><div class="egroup-body">
+              <div class="egroup-chips">
+                <span class="chip">人工智能经济学</span><span class="chip">人工智能管理学</span><span class="chip">人工智能金融学</span><span class="chip">数字金融</span><span class="chip">数字货币原理</span><span class="chip">量化金融专题</span><span class="chip">随机微积分及其在量化金融的应用</span><span class="chip">金融计量<span class="chip-honor">荣</span></span><span class="chip">期权、期货与衍生品定价</span><span class="chip">低碳经济与碳金融</span><span class="chip">网络营销与信息经济战略</span><span class="chip">数字时代的组织行为与领导力</span>
+              </div>
+            </div></div>
+          </div>
+
+          <div class="egroup">
+            <div class="egroup-head" role="button" tabindex="0" aria-expanded="false">
+              <div class="egroup-title">二、金融与投资</div>
+              <div class="egroup-meta"><span class="egroup-count">14 门</span></div>
+              <div class="egroup-chev" aria-hidden="true">▾</div>
+            </div>
+            <div class="egroup-wrap"><div class="egroup-body">
+              <div class="egroup-chips">
+                <span class="chip">金融经济学</span><span class="chip">投资学</span><span class="chip">投资研究：从理论到实践</span><span class="chip">国际金融</span><span class="chip">货币银行学</span><span class="chip">财务会计</span><span class="chip">财务报表分析</span><span class="chip">期权、期货与衍生品定价</span><span class="chip">随机微积分及其在量化金融的应用</span><span class="chip">金融计量<span class="chip-honor">荣</span></span><span class="chip">数字金融</span><span class="chip">人工智能金融学</span><span class="chip">中国金融改革</span><span class="chip">货币的秩序：国际货币体系的演进和未来</span>
+              </div>
+            </div></div>
+          </div>
+
+          <div class="egroup">
+            <div class="egroup-head" role="button" tabindex="0" aria-expanded="false">
+              <div class="egroup-title">三、宏观经济与增长</div>
+              <div class="egroup-meta"><span class="egroup-count">10 门</span></div>
+              <div class="egroup-chev" aria-hidden="true">▾</div>
+            </div>
+            <div class="egroup-wrap"><div class="egroup-body">
+              <div class="egroup-chips">
+                <span class="chip">中国宏观经济</span><span class="chip">中国经济</span><span class="chip">经济增长导论</span><span class="chip">发展经济学</span><span class="chip">新结构经济学导论</span><span class="chip">中国改革专题</span><span class="chip">世界经济千年史</span><span class="chip">宏观经济与健康</span><span class="chip">中国财政前沿问题</span><span class="chip">公共财政学</span>
+              </div>
+            </div></div>
+          </div>
+
+          <div class="egroup">
+            <div class="egroup-head" role="button" tabindex="0" aria-expanded="false">
+              <div class="egroup-title">四、国际贸易与国际治理</div>
+              <div class="egroup-meta"><span class="egroup-count">7 门</span></div>
+              <div class="egroup-chev" aria-hidden="true">▾</div>
+            </div>
+            <div class="egroup-wrap"><div class="egroup-body">
+              <div class="egroup-chips">
+                <span class="chip">国际贸易</span><span class="chip">国际金融</span><span class="chip">中国与全球经济学：理论与实践</span><span class="chip">国际金融组织与全球金融治理</span><span class="chip">国际发展前沿：理论与实务</span><span class="chip">货币的秩序：国际货币体系的演进和未来</span><span class="chip">气候变化经济学</span>
+              </div>
+            </div></div>
+          </div>
+
+          <div class="egroup">
+            <div class="egroup-head" role="button" tabindex="0" aria-expanded="false">
+              <div class="egroup-title">五、微观经济与产业组织</div>
+              <div class="egroup-meta"><span class="egroup-count">13 门</span></div>
+              <div class="egroup-chev" aria-hidden="true">▾</div>
+            </div>
+            <div class="egroup-wrap"><div class="egroup-body">
+              <div class="egroup-chips">
+                <span class="chip">产业组织</span><span class="chip">产业组织理论<span class="chip-honor">荣</span></span><span class="chip">城市经济学</span><span class="chip">环境经济学</span><span class="chip">卫生经济学</span><span class="chip">劳动经济学<span class="chip-honor">荣</span></span><span class="chip">教育经济学</span><span class="chip">博弈论</span><span class="chip">博弈与社会</span><span class="chip">数理经济学</span><span class="chip">应用微观计量经济学</span><span class="chip">应用微观计量经济学<span class="chip-honor">荣</span></span><span class="chip">社会经济网络导论</span>
+              </div>
+            </div></div>
+          </div>
+
+          <div class="egroup">
+            <div class="egroup-head" role="button" tabindex="0" aria-expanded="false">
+              <div class="egroup-title">六、管理与战略</div>
+              <div class="egroup-meta"><span class="egroup-count">6 门</span></div>
+              <div class="egroup-chev" aria-hidden="true">▾</div>
+            </div>
+            <div class="egroup-wrap"><div class="egroup-body">
+              <div class="egroup-chips">
+                <span class="chip">管理学基础</span><span class="chip">管理学经典选读</span><span class="chip">战略管理学</span><span class="chip">管理学实证方法</span><span class="chip">行为经济学</span><span class="chip">数字时代的组织行为与领导力</span>
+              </div>
+            </div></div>
+          </div>
+
+          <div class="egroup">
+            <div class="egroup-head" role="button" tabindex="0" aria-expanded="false">
+              <div class="egroup-title">七、公共政策与国家治理</div>
+              <div class="egroup-meta"><span class="egroup-count">7 门</span></div>
+              <div class="egroup-chev" aria-hidden="true">▾</div>
+            </div>
+            <div class="egroup-wrap"><div class="egroup-body">
+              <div class="egroup-chips">
+                <span class="chip">公共政策参与</span><span class="chip">国家理论</span><span class="chip">习近平经济思想概论</span><span class="chip">经济哲学专题</span><span class="chip">经济和政治哲学<span class="chip-honor">荣</span></span><span class="chip">政治学概论</span><span class="chip">中国财政前沿问题</span>
+              </div>
+            </div></div>
+          </div>
+
+          <div class="egroup">
+            <div class="egroup-head" role="button" tabindex="0" aria-expanded="false">
+              <div class="egroup-title">八、研究方法与学术训练</div>
+              <div class="egroup-meta"><span class="egroup-count">8 门</span></div>
+              <div class="egroup-chev" aria-hidden="true">▾</div>
+            </div>
+            <div class="egroup-wrap"><div class="egroup-body">
+              <div class="egroup-chips">
+                <span class="chip">经济学研究训练</span><span class="chip">经济学研究与写作<span class="chip-honor">荣</span></span><span class="chip">社会经济调查数据分析</span><span class="chip">社会经济调查理论方法与实践</span><span class="chip">经济学高级研讨班</span><span class="chip">经济学高级研讨班<span class="chip-honor">荣</span></span><span class="chip">经济学学术与实践前沿</span><span class="chip">经济管理学术与实践前沿讲座</span>
+              </div>
+            </div></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1383,11 +1483,7 @@ html{scroll-padding-bottom:90px}
       <div class="section-sub">合作院校推荐 · 三方审核录取</div>
     </div>
 
-    <div class="stack-hint reveal in-view"><span></span>左右滑动，看懂谁能报、怎么录<span></span></div>
-    <div class="swipe-deck reveal in-view">
-    <div class="swipe-track" tabindex="0" aria-label="招生对象与录取标准，可左右滑动">
-    <div class="card big-card swipe-card active">
-      <div class="swipe-idx">1 / 3</div>
+    <div class="card big-card reveal in-view" style="--d:.05s">
       <div class="big-card-head">
         <div class="icon-circle">🎓</div>
         <div>
@@ -1395,15 +1491,9 @@ html{scroll-padding-bottom:90px}
           <div class="head-en">WHO CAN APPLY</div>
         </div>
       </div>
-      <div class="target-box">
-        具有<strong>合作院校正式学籍</strong>的<strong>全日制在读生</strong>
-      </div>
-      <div class="swipe-foot">不限专业背景 · 经济学或非经济学相关专业同样欢迎</div>
-    </div>
+      <div class="target-box">具有<strong>合作院校正式学籍</strong>的<strong>全日制在读生</strong>。</div>
 
-    <div class="card big-card swipe-card">
-      <div class="swipe-idx">2 / 3</div>
-      <div class="big-card-head">
+      <div class="big-card-head" style="margin-top:22px">
         <div class="icon-circle">✅</div>
         <div>
           <div class="head-title">录取标准</div>
@@ -1413,54 +1503,17 @@ html{scroll-padding-bottom:90px}
       <div class="criteria-list">
         <div class="criteria-item">
           <div class="criteria-dot"></div>
-          <div>由 <strong>合作院校负责选拔</strong> 品学兼优的同学</div>
+          <div>合作院校负责选拔<strong>品学兼优</strong>的同学，确保选拔的学生能够达到预期的<strong>良好品德及学术标准</strong>。</div>
         </div>
         <div class="criteria-item">
           <div class="criteria-dot"></div>
-          <div>确保选拔学生能够达到预期的 <strong>良好品德及学术标准</strong></div>
+          <div>北京大学国家发展研究院负责对推荐同学进行<strong>审核</strong>。</div>
         </div>
         <div class="criteria-item">
           <div class="criteria-dot"></div>
-          <div>北京大学国家发展研究院负责对推荐同学进行 <strong>审核</strong></div>
+          <div>北京大学教务部<strong>终审后录取</strong>。</div>
         </div>
       </div>
-    </div>
-
-    <div class="card flow-card swipe-card">
-      <div class="swipe-idx">3 / 3</div>
-      <div class="flow-title">— 录 取 流 程 —</div>
-
-      <div class="flow-step">
-        <div class="flow-left">
-          <div class="flow-num">1</div>
-          <div class="flow-connector"></div>
-        </div>
-        <div class="flow-right">
-          <div class="flow-step-title">合作院校选拔</div>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="flow-left">
-          <div class="flow-num">2</div>
-          <div class="flow-connector"></div>
-        </div>
-        <div class="flow-right">
-          <div class="flow-step-title">国发院审核</div>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="flow-left">
-          <div class="flow-num">3</div>
-        </div>
-        <div class="flow-right" style="padding-bottom:0;">
-          <div class="flow-step-title">北大教务部终审录取</div>
-        </div>
-      </div>
-    </div>
-    </div>
-    <div class="swipe-dots" aria-hidden="true"><i class="on" style="cursor: pointer;"></i><i style="cursor: pointer;" class=""></i><i style="cursor: pointer;" class=""></i></div>
     </div>
   </section>
   <!-- ==================== 07 往届同学反馈 ==================== -->
@@ -1507,7 +1560,7 @@ html{scroll-padding-bottom:90px}
           <div class="voice-title">学习价值 · 拓展视野</div>
           <div class="stack-idx">3 / 3</div>
         </div>
-        <p>在本专业之外<strong>建立经济学知识体系</strong>，拓展学术视野、丰富知识结构，也是一次<strong>探索未来发展方向</strong>的机会。</p>
+        <p><strong>建立经济学知识体系</strong>，拓展学术视野、丰富知识结构，也是一次<strong>探索未来发展方向</strong>的机会。</p>
       </div>
     </div>
     <div class="card voice-ending reveal in-view" style="--d:.25s">
@@ -1598,11 +1651,6 @@ html{scroll-padding-bottom:90px}
           <div class="cond-title">📋 获 证 条 件</div>
           <div class="cond-item"><div class="cond-dot"></div><div>修完教学计划规定的课程及学分，成绩合格</div></div>
           <div class="cond-item"><div class="cond-dot"></div><div>凭已获得的<strong>国家承认的全日制本科第一学士学位毕业证书及学位证书</strong>（或教育部留学服务中心认证的境外本科第一学士学位证书）</div></div>
-        </div>
-        <div class="cert-box">
-          <div class="cert-title">🔍 证 书 验 证</div>
-          <div class="cert-item"><div class="cert-icon yes">✓</div><div>可在 <strong>北京大学教务部</strong> 查询与验证</div></div>
-          <div class="cert-item"><div class="cert-icon no">✕</div><div>无法在 <strong>学信网</strong> 上查询与验证</div></div>
         </div>
       </div></div>
     </div>
@@ -1722,12 +1770,32 @@ html{scroll-padding-bottom:90px}
     <button class="cta-btn" type="button" id="ctaBtn">查看报名方式</button>
   </div>
 
+  <div class="credit-tracker" id="creditTracker" role="region" aria-label="学分统计">
+    <div class="ct-item">
+      <span class="ct-label">总学分</span>
+      <span class="ct-val"><span id="ctTotal">0</span><b>/ 42</b></span>
+    </div>
+    <span class="ct-sep"></span>
+    <div class="ct-item">
+      <span class="ct-label">必修</span>
+      <span class="ct-val"><span id="ctReq">0</span><b>/ 15</b></span>
+    </div>
+    <span class="ct-sep"></span>
+    <div class="ct-item">
+      <span class="ct-label">选修</span>
+      <span class="ct-val"><span id="ctEle">0</span><b>/ 27</b></span>
+    </div>
+    <div class="ct-bar" aria-hidden="true"><i id="ctBarFill"></i></div>
+    <span class="ct-done" id="ctDone">🎉 学分达标</span>
+    <button class="ct-reset" type="button" id="ctReset" aria-label="清空选择">清空</button>
+  </div>
+
 </div>
   <nav class="nav-menu" id="navMenu" aria-label="页面导航">
-    <div class="nav-menu-head" spellcheck="true">PAGE GUIDE · 页面导航</div>
-  <div class="nav-item" spellcheck="true"><i>01</i>亮点速览</div><div class="nav-item" spellcheck="true"><i>02</i>学院简介</div><div class="nav-item" spellcheck="true"><i>03</i>项目介绍</div><div class="nav-item" spellcheck="true"><i>04</i>项目优势</div><div class="nav-item" spellcheck="true"><i>05</i>师资力量</div><div class="nav-item" spellcheck="true"><i>06</i>培养方案</div><div class="nav-item" spellcheck="true"><i>07</i>招生对象</div><div class="nav-item" spellcheck="true"><i>08</i>往届反馈</div><div class="nav-item" spellcheck="true"><i>09</i>常见问题</div><div class="nav-item nav-apply cur" spellcheck="true"><i>10</i>报名咨询</div></nav>
+    <div class="nav-menu-head">PAGE GUIDE · 页面导航</div>
+  <div class="nav-item"><i>01</i>亮点速览</div><div class="nav-item"><i>02</i>学院简介</div><div class="nav-item"><i>03</i>项目介绍</div><div class="nav-item"><i>04</i>项目优势</div><div class="nav-item"><i>05</i>师资力量</div><div class="nav-item"><i>06</i>培养方案</div><div class="nav-item"><i>07</i>招生对象</div><div class="nav-item"><i>08</i>往届反馈</div><div class="nav-item"><i>09</i>常见问题</div><div class="nav-item nav-apply cur"><i>10</i>报名咨询</div></nav>
   <button class="nav-fab" id="navFab" type="button" aria-label="打开页面导航" aria-expanded="false">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="16" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg><span spellcheck="true">导航</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="16" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg><span>导航</span>
   </button>
 
 <script>
@@ -1823,6 +1891,107 @@ html{scroll-padding-bottom:90px}
     h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}});
   });
 
+  /* ========== 选修课八大方向折叠 ========== */
+  [].slice.call(document.querySelectorAll('.egroup-head')).forEach(function(h){
+    function toggle(){
+      var g=h.parentNode;var open=!g.classList.contains('open');
+      g.classList.toggle('open',open);h.setAttribute('aria-expanded',open?'true':'false');
+    }
+    h.addEventListener('click',toggle);
+    h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}});
+  });
+
+  /* ========== 课程可选中学分自选 ========== */
+  var tracker=document.getElementById('creditTracker');
+  var ctTotal=document.getElementById('ctTotal'),ctReq=document.getElementById('ctReq'),ctEle=document.getElementById('ctEle');
+  var ctBarFill=document.getElementById('ctBarFill'),ctDone=document.getElementById('ctDone'),ctReset=document.getElementById('ctReset');
+  var REQ_TOTAL=15, ELE_TOTAL=27, ALL_TOTAL=42;
+
+  // 标记可选中：必修课 chips 在第一个 course-card-head(必) 下的 .egroup-chips；选修课在 .egroup-body 内
+  var reqChips=[].slice.call(document.querySelectorAll('.cur-card .cur-sec > .egroup-chips .chip'));
+  var eleChips=[].slice.call(document.querySelectorAll('.cur-card .egroup-body .chip'));
+  var allChips=reqChips.concat(eleChips);
+
+  // 课程学分表（课程名 -> 学分）
+  var courseCredits={
+    '气候变化经济学':3,'中国与全球经济学：理论与实践':1,'货币的秩序：国际货币体系的演进和未来':3,
+    '国际金融组织与全球金融治理':3,'财务会计':3,'财务报表分析':3,'经济增长导论':3,'博弈与社会':3,
+    '宏观经济与健康':3,'管理学经典选读':3,'期权、期货与衍生品定价':3,'中国改革专题':2,'产业组织':3,
+    '城市经济学':3,'低碳经济与碳金融':3,'发展经济学':3,'国际金融':3,'国际贸易':3,'环境经济学':3,
+    '货币银行学':3,'社会经济调查数据分析':3,'投资学':3,'网络营销与信息经济战略':3,'卫生经济学':3,
+    '战略管理学':3,'中国财政前沿问题':3,'中国宏观经济':3,'经济学研究训练':3,'公共财政学':3,
+    '国际发展前沿：理论与实务':3,'教育经济学':3,'金融经济学':3,'随机微积分及其在量化金融的应用':3,
+    '政治学概论':3,'中国经济':3,'经济学高级研讨班':3,'博弈论':3,'量化金融专题':2,'公共政策参与':3,
+    '数字货币原理':3,'数字时代的组织行为与领导力':3,'世界经济千年史':3,'投资研究：从理论到实践':3,
+    '金融计量':3,'劳动经济学':3,'经济和政治哲学':3,'管理学基础':3,'应用微观计量经济学':3,
+    '社会经济调查理论方法与实践':5,'中国金融改革':3,'经济哲学专题':3,'产业组织理论':3,
+    '经济学研究与写作':3,'数字金融':3,'经济学学术与实践前沿':1,'行为经济学':3,'管理学实证方法':3,
+    '数理经济学':3,'新结构经济学导论':2,'人工智能经济学':3,'人工智能管理学':3,'习近平经济思想概论':2,
+    '国家理论':3,'人工智能金融学':3,'经济管理学术与实践前沿讲座':1,'社会经济网络导论':3
+  };
+
+  // 从 chip 提取纯课程名（去掉“荣”徽标）
+  function chipName(c){
+    var honor=c.querySelector('.chip-honor');
+    var clone=c.cloneNode(true);
+    var h=clone.querySelector('.chip-honor');
+    if(h)h.parentNode.removeChild(h);
+    return clone.textContent.trim();
+  }
+
+  allChips.forEach(function(c){
+    c.classList.add('selectable');
+    c.setAttribute('role','button');
+    c.setAttribute('tabindex','0');
+    c.setAttribute('aria-pressed','false');
+    var name=chipName(c);
+    var credit=courseCredits[name]||3;
+    c.setAttribute('data-credit',credit);
+  });
+
+  function updateTracker(){
+    var req=0,ele=0;
+    reqChips.forEach(function(c){if(c.classList.contains('on'))req+=parseInt(c.getAttribute('data-credit'),10)||0});
+    eleChips.forEach(function(c){if(c.classList.contains('on'))ele+=parseInt(c.getAttribute('data-credit'),10)||0});
+    var total=req+ele;
+    ctTotal.textContent=total;
+    ctReq.textContent=req;
+    ctEle.textContent=ele;
+    var pct=Math.min(100,Math.round(total/ALL_TOTAL*100));
+    ctBarFill.style.height=pct+'%';
+    var done=req>=REQ_TOTAL && total>=ALL_TOTAL;
+    ctDone.classList.toggle('show',done);
+    tracker.classList.toggle('done',done);
+    return {req:req,ele:ele,total:total,done:done};
+  }
+
+  function toggleChip(c){
+    c.classList.toggle('on');
+    var on=c.classList.contains('on');
+    c.setAttribute('aria-pressed',on?'true':'false');
+    updateTracker();
+  }
+
+  allChips.forEach(function(c){
+    c.addEventListener('click',function(){toggleChip(c)});
+    c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleChip(c)}});
+  });
+
+  ctReset.addEventListener('click',function(){
+    allChips.forEach(function(c){c.classList.remove('on');c.setAttribute('aria-pressed','false')});
+    updateTracker();
+  });
+
+  // 浮条：进入培养方案模块时显示，离开后隐藏
+  var curSection=document.querySelector('.section[data-nav-idx="5"]')||document.querySelectorAll('.section')[5];
+  function updateTrackerVis(){
+    if(!curSection)return;
+    var r=curSection.getBoundingClientRect();
+    var vh=window.innerHeight||document.documentElement.clientHeight;
+    var inView=r.top<vh*0.75 && r.bottom>vh*0.25;
+    tracker.classList.toggle('show',inView && (updateTracker().total>0));
+  }
+
   /* ========== 底部报名条：离开首屏后出现，到报名区隐藏 ========== */
   var cta=document.getElementById('ctaBar'),applySec=document.getElementById('apply');
   document.getElementById('ctaBtn').addEventListener('click',function(){applySec.scrollIntoView({behavior:'smooth',block:'start'})});
@@ -1832,7 +2001,7 @@ html{scroll-padding-bottom:90px}
   }
 
   var stTick=false;
-  function onStackScroll(){if(stTick)return;stTick=true;requestAnimationFrame(function(){updateStacks();updateCta();stTick=false})}
+  function onStackScroll(){if(stTick)return;stTick=true;requestAnimationFrame(function(){updateStacks();updateCta();updateTrackerVis();stTick=false})}
   window.addEventListener('scroll',onStackScroll,{passive:true});
   window.addEventListener('resize',onStackScroll);
   onStackScroll();
@@ -1842,6 +2011,8 @@ html{scroll-padding-bottom:90px}
     var fab=document.getElementById('navFab'),menu=document.getElementById('navMenu');
     if(!fab||!menu)return;
     var labels=['亮点速览','学院简介','项目介绍','项目优势','师资力量','培养方案','招生对象','往届反馈','常见问题','报名咨询'];
+    // 清空 HTML 中硬编码的导航项（只保留 .nav-menu-head），避免与 JS 生成项重复
+    [].slice.call(menu.querySelectorAll('.nav-item')).forEach(function(n){n.remove()});
     var secs=[].slice.call(document.querySelectorAll('.phone-frame > section.section'));
     var items=[];
     secs.forEach(function(sec,i){
@@ -2064,4 +2235,4 @@ html{scroll-padding-bottom:90px}
 
 
 
-<div style="position: fixed; z-index: 10075; pointer-events: none; border: 2px solid rgb(20, 147, 255); background: rgba(20, 147, 255, 0.14); box-sizing: border-box; border-radius: 4px; display: none;"></div><div style="position: fixed; z-index: 10075; pointer-events: none; border: 2px solid rgb(20, 147, 255); background: rgba(20, 147, 255, 0.14); box-sizing: border-box; border-radius: 4px; display: none;"></div></body></html>
+</body></html>
