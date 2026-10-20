@@ -1926,9 +1926,10 @@ html{scroll-padding-bottom:90px}
     var FOUND_YEAR=1994;
     var nowYear=new Date().getFullYear();
     var rawYears=nowYear-FOUND_YEAR;
-    // 对外统一表述为「30+」：未满 40 周年一律显示 30+
+    // 徽章只写「30+」，时间轴末项「建院…周年」仍按实际年数自动计算
     var years=rawYears<40?30:Math.floor(rawYears/10)*10;
     if(years<0)years=0;
+    if(rawYears<0)rawYears=0;
     // 中文数字（1～199）
     var CN='零一二三四五六七八九';
     function cnNum(n){
@@ -1941,7 +1942,7 @@ html{scroll-padding-bottom:90px}
     document.querySelectorAll('[data-current-year]').forEach(function(el){el.textContent=nowYear});
     document.querySelectorAll('[data-anniversary]').forEach(function(el){el.textContent=years});
     document.querySelectorAll('[data-current-text]').forEach(function(el){
-      el.innerHTML='建院'+cnNum(years)+'<br>周年';
+      el.innerHTML='建院'+cnNum(rawYears)+'<br>周年';
     });
   })();
 
